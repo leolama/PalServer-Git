@@ -1,6 +1,6 @@
 # Pal Server Monitoring with Bash
 
-My own (probably bad) Bash scripts to start, monitor, backup and restart a PalServer for Palworld (through a terminal)
+My own (probably bad) Bash scripts to start, monitor, backup and restart a PalServer for Palworld (through a command line). I shouldn't have to say that this is obviously for fun.
 
 ## Usage
 
@@ -21,4 +21,10 @@ The script uses the command `ARRCON -S palworld -q "$1"` to run RCON commands. Y
 
 ### Starting the server
 Make sure you've given **each** file execute permissions: `sudo chmod +x <yourscript>`, and then simply run `./monitor-palserver.sh`
-Run tmux attach -t PalServerMonitor to...monitor the server for RAM usage and current players
+Run `tmux attach -t PalServerMonitor` to...monitor the server for RAM usage and current players
+
+### Stopping the server
+`tmux attach -t PalServerMonitor` > Ctrl + C
+`ARRCON -S palworld save`
+`ARRCON -S palworld "shutdown 5`
+The server will start shutting down in 5 seconds
