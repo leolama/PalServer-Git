@@ -190,19 +190,26 @@ while true; do
     # Check memory usage of the server for visual purposes, data isn't used
     get_memory_usage "PalServer-Linux"
     get_showplayers_rcon
-    echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for $counter / 21600 seconds"
+    echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for $counter / $AUTO_RESTART_TIMER seconds"
 
-    # Sleep for a short duration before checking again (e.g., 10 seconds)
-    sleep 60
+    # Sleep for a short duration before checking again
+    sleep $MONITOR_INTERVAL
 
-    # Increment the counter for 10-second intervals
-    ((counter += 60))
+    # Increment the counter
+    ((counter += $MONITOR_INTERVAL))
 
-    # Check if 6 hours have passed (21600 seconds)
-    if [ $counter -ge 21600 ]; then
+    # Check if we need to get a backup
+    if [ $counter -ge $AUTO_BACKUP_TIMER ]; then
         # Backup necessary files and restart the server
-        echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for 6 hours, starting a graceful restart"
+        echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for $AUTO_BACKUP_TIMER seconds, getting a backup"
         backup_server
+        counter=0  # Reset the counter after shutdown
+    fi
+
+    # Check if we need to restart
+    if [ $counter -ge $AUTO_RESTART_TIMER ]; then
+        # Backup necessary files and restart the server
+        echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for $AUTO_RESTART_TIMER seconds, starting a graceful restart"
         restart_server_6hours
         counter=0  # Reset the counter after shutdown
     fi
