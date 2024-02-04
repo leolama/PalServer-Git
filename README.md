@@ -24,7 +24,5 @@ Make sure you've given **each** file execute permissions: `sudo chmod +x <yoursc
 Run `tmux attach -t PalServerMonitor` to...monitor the server for RAM usage and current players
 
 ### Stopping the server
-`tmux attach -t PalServerMonitor` > Ctrl + C
-`ARRCON -S palworld save`
-`ARRCON -S palworld "shutdown 5`
-The server will start shutting down in 5 seconds
+Run `./shutdown-palserver.sh`
+The server will save and shutdown in 1 second
