@@ -63,9 +63,9 @@ else
         tmux new-session -d -s "$BACKUP_SESSION_NAME" "$BACKUP_SCRIPT"
         # Error handling
         if [ $? -eq 0 ]; then
-            echo -e "$(date +"%d-%m %H:%M:%S") ${Green}monitor-palserver.sh${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session was created successfully"
+            echo -e "$(date +"%d-%m %H:%M:%S") ${Green}$CURRENT_SCRIPT${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session was created successfully"
         else
-            echo -e "$(date +"%d-%m %H:%M:%S") ${Red}monitor-palserver.sh${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session was not created"
+            echo -e "$(date +"%d-%m %H:%M:%S") ${Red}$CURRENT_SCRIPT${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session was not created"
         fi
         sleep 1
         exit 0

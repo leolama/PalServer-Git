@@ -55,9 +55,9 @@ if [ -n "$pid" ]; then
     echo -e "$(date +"%d-%m %H:%M:%S") ${Green}$CURRENT_SCRIPT${NC}: Killing monitor-palserver.sh (PID: $pid)"
     kill $pid
     if [ $? -eq 0 ]; then
-        echo -e "$(date +"%d-%m %H:%M:%S") ${Green}restart.palserver.sh${NC}: Killed monitor-palserver.sh (PID: $pid)"
+        echo -e "$(date +"%d-%m %H:%M:%S") ${Green}$CURRENT_SCRIPT${NC}: Killed monitor-palserver.sh (PID: $pid)"
     else
-        echo -e "$(date +"%d-%m %H:%M:%S") ${Red}restart.palserver.sh${NC}: Failed to kill monitor-palserver.sh (PID: $pid)"
+        echo -e "$(date +"%d-%m %H:%M:%S") ${Red}$CURRENT_SCRIPT${NC}: Failed to kill monitor-palserver.sh (PID: $pid)"
     fi
 else
     echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: monitor-palserver.sh is not running"
