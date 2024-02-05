@@ -47,7 +47,7 @@ else
     if [ $? == 0 ]; then
         # The expected tmux session exists, run fullbackup-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$FULLBACKUP_SESSION_NAME${NC} tmux session exists, running $CURRENT_SCRIPT in it"
-        tmux send-keys -t "$FULLBACKUP_SESSION_NAME" "$BACKUP_SCRIPT" Enter
+        tmux send-keys -t "$FULLBACKUP_SESSION_NAME" "$BACKUP_SCRIPT" C-m
         sleep 1
         exit 0
     else

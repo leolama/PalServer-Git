@@ -47,7 +47,7 @@ else
     if [ $? == 0 ]; then
         # The expected tmux session exists, run backup-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session exists, running backup-palserver.sh in it"
-        tmux send-keys -t "$BACKUP_SESSION_NAME" "$BACKUP_SCRIPT" Enter
+        tmux send-keys -t "$BACKUP_SESSION_NAME" "$BACKUP_SCRIPT" C-m
         # Error handling
         if [ $? -eq 0 ]; then
             echo -e "$(date +"%d-%m %H:%M:%S") ${Green}$CURRENT_SCRIPT${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session was created successfully"
