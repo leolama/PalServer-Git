@@ -89,7 +89,7 @@ start_server() {
     if [ $? == 0 ]; then
         # The expected tmux session exists, run start-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$STARTING_SESSION_NAME${NC} tmux session exists, running start-palserver.sh in it"
-        tmux send-keys -t "$STARTING_SESSION_NAME" "$START_SCRIPT" Enter
+        tmux send-keys -t "$STARTING_SESSION_NAME" "$START_SCRIPT" C-m
     else
         # The expected tmux session does not exist, create and run start-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$STARTING_SESSION_NAME${NC} tmux session does not exist, starting a new session called $STARTING_SESSION_NAME and running start-palserver.sh in it"
@@ -110,7 +110,7 @@ backup_server() {
     if [ $? -eq 0 ]; then
         # The expected tmux session exists, run backup-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session exists, running backup-palserver.sh in it"
-        tmux send-keys -t "$BACKUP_SESSION_NAME" "$BACKUP_SCRIPT" Enter
+        tmux send-keys -t "$BACKUP_SESSION_NAME" "$BACKUP_SCRIPT" C-m
     else
         # The expected tmux session does not exist, create and run backup-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$BACKUP_SESSION_NAME${NC} tmux session does not exist, starting a new session called $BACKUP_SESSION_NAME and running backup-palserver.sh in it"
@@ -149,7 +149,7 @@ else
     if [ $? == 0 ]; then
         # The expected tmux session exists, run monitor-palserver.sh
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: The ${Yellow}$MONITOR_SESSION_NAME${NC} tmux session exists, running monitor-palserver.sh in it"
-        tmux send-keys -t "$MONITOR_SESSION_NAME" "$MONITOR_SCRIPT" Enter
+        tmux send-keys -t "$MONITOR_SESSION_NAME" "$MONITOR_SCRIPT" C-m
         sleep 1
         exit 0
     else
@@ -199,11 +199,10 @@ while true; do
     ((counter += $MONITOR_INTERVAL))
 
     # Check if we need to get a backup
-    if [ $counter -ge $AUTO_BACKUP_TIMER ]; then
+    if [ $((counter % AUTO_BACKUP_TIMER)) -eq 0 ]; then
         # Backup necessary files and restart the server
         echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for $AUTO_BACKUP_TIMER seconds, getting a backup"
         backup_server
-        counter=0  # Reset the counter after shutdown
     fi
 
     # Check if we need to restart
