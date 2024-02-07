@@ -13,7 +13,7 @@ PALSERVER_SH_LOCATION="/path/to/your/PalServer/PalServer.sh"
 
 ## Login to steam anonymously, check for updates to PalWorld, validate the files and quit
 echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Checking for updates and validating PalServer"
-steamcmd +login anonymous +app_update 2394010 validate +quit
+steamcmd +login anonymous +app_update 2394010 +quit
 if [ $? -eq 0 ]; then
     echo -e "$(date +"%d-%m %H:%M:%S") ${Green}$CURRENT_SCRIPT${NC}: PalServer is updated and validated"
 else
