@@ -192,12 +192,6 @@ while true; do
     get_showplayers_rcon
     echo -e "$(date +"%d-%m %H:%M:%S") ${Yellow}$CURRENT_SCRIPT${NC}: Server has been online for $counter / $AUTO_RESTART_TIMER seconds"
 
-    # Sleep for a short duration before checking again
-    sleep $MONITOR_INTERVAL
-
-    # Increment the counter
-    ((counter += $MONITOR_INTERVAL))
-
     # Check if we need to get a backup
     if [ $((counter % AUTO_BACKUP_TIMER)) -eq 0 ]; then
         # Backup necessary files and restart the server
@@ -212,5 +206,11 @@ while true; do
         restart_server_6hours
         counter=0  # Reset the counter after shutdown
     fi
+
+    # Sleep for a short duration before checking again
+    sleep $MONITOR_INTERVAL
+
+    # Increment the counter
+    ((counter += $MONITOR_INTERVAL))
 done
 #!!# End loop #!!#
